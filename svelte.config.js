@@ -1,20 +1,30 @@
-import { mdsvex } from "mdsvex";
-import mdsvexConfig from "./mdsvex.config.js";
-import adapter from '@sveltejs/adapter-netlify'
+import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-static';
+import { mdsvex } from 'mdsvex';
+import rehypeExternalLinks from 'rehype-external-links';
 
+const extensions = ['.svelte', '.md'];
+
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
+	// Consult https://github.com/sveltejs/svelte-preprocess
+	// for more information about preprocessors
+	preprocess: [
+		preprocess({
+      preserve: ['module']
+    }),
+		mdsvex({
+			extensions: extensions,
+      rehypePlugins: [rehypeExternalLinks]
+		})
+	],
+	extensions: extensions,
+
 	kit: {
-		adapter: adapter(), // currently the adapter does not take any options
+		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		prerender: {
-			crawl: true,
-			enabled: true,
-			onError: 'continue',
-			pages: ['*'],
-		},
-	},
-	extensions: [".svelte", ...mdsvexConfig.extensions],
-	preprocess: [mdsvex(mdsvexConfig)]
+		adapter: adapter()
+	}
 };
 
 export default config;

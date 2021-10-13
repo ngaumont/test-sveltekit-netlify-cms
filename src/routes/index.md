@@ -12,4 +12,4 @@ This is the [`/routes/index.md`](https://github.com/buhrmi/sveltekit-netlify-cms
 * Coucou hibou
 * Ceci est un autre test
 
-Je vais rajouter un lien [ngaumont.fr](ngaumont.fr)
+Je vais rajouter un lien [ngaumont.fr](https://ngaumont.fr)

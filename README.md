@@ -1,28 +1,44 @@
-# sveltekit-netlify-cms
+# matfantinel.github.io / fantinel.dev
 
-A SvelteKit skeleton app with Netlify CMS living in `/admin`. Netlify CMS is configured to directly edit `/routes/*.md` files, which are preprocessed by [mdsvex](https://mdsvex.com).
+This is my own personal website, built with SvelteKit. It also holds my own personal blog.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/buhrmi/sveltekit-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
-[Demo](https://sveltekit-netlify-cms.netlify.app)
+<p align="center">
+    <img src="static/images/projects/personal-website-transparent.png" alt="Screenshot" />
+</p>
 
-## Developing
 
-Once you've downloaded this repo and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+It was built with a few goals in mind:
 
-```bash
+* Responsive design: the website looks and behaves well on screens of all sizes;
+* Fast: it only loads what's needed for it to work;
+* Adaptive: it supports dark mode from most operating systems by default (desktop and mobile);
+* Privacy-friendly: I don't need to know who you are and what you do. It uses [Plausible](https://plausible.io/) instead of Google Analytics;
+* Pretty: have a pleasant design that is both accessible and pleasing to the eye.
+
+I achieved this with the help of SvelteKit. There is almost no JavaScript running, and it actually works with JS disabled! While JS is awesome, it's important to know when it's not needed.
+
+# Building & Running Locally
+
+This website is powered by SvelteKit. As of this time, SvelteKit is currently in beta, but its API is stable enough to use it.
+
+To run it locally, you simply have to run:
+
+```shell
+# First, install dependencies
+npm install
+# Then, run it on dev mode
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+The site should now be available at http://0.0.0.0:3000/ on your local machine, and your local machine's IP address on your network—great for testing on mobile OSes.
 
-To create the production version of your app, run:
+# Optimizing images
 
-```bash
-npm run build
+I've built an image-optimizer script called [image-transmutation](https://github.com/matfantinel/image-transmutation) that is used on this website. For now, you have to run it manually, while I don't push it to npm.
+
+On the image-transmutation project folder, run:
+
+```shell
+node ./index.js --run --sourceFolder "{YOUR_PROJECT_FOLDER}/static/images" --targetFolder "{YOUR_PROJECT_FOLDER}/static/optimized-images" --inputFormats "jpg" --inputFormats "jpeg" --inputFormats "png" --outputFormats "webp" --outputFormats "avif" --outputFormats "png"
 ```
-
-> You can preview the built app with `npm run preview`. However, this should _not_ be used to serve your app in production.
